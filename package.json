@@ -1,7 +1,7 @@
 {
   "name": "rn_glycemic_limit_poc",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -11,10 +11,15 @@
   },
   "dependencies": {
     "@expo-google-fonts/karla": "^0.2.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "expo": "~44.0.0",
     "expo-app-loading": "~1.3.0",
+    "expo-asset": "~8.4.6",
+    "expo-constants": "~13.0.1",
+    "expo-file-system": "~13.1.4",
     "expo-font": "~10.0.4",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",
@@ -28,9 +33,7 @@
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
     "react-native-webview": "11.15.0",
-    "expo-constants": "~13.0.1",
-    "expo-asset": "~8.4.6",
-    "expo-file-system": "~13.1.4"
+    "styled-components": "^4.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
