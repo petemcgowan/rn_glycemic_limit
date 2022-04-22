@@ -4,15 +4,18 @@ import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
 import TrackerContext from "../TrackerContext";
 import styled, { withTheme } from "styled-components";
 import GlycemicItem from "./GlycemicItem";
+import { getGLResult } from "../utils/GlycemicUtils";
 
 // the filter
 const GlycemicList = ({ searchPhrase, data, setClicked }) => {
-  const { trackerItems, setTrackerItems } = useContext(TrackerContext);
+  const { trackerItems, setTrackerItems, setTotalCarbs, setTotalGILoad } =
+    useContext(TrackerContext);
 
   console.log("List, searchPhrase:" + searchPhrase);
 
   // item is an entry in the glycemicPrunedData/data list
   const renderItem = ({ item }) => {
+    const giLoad = getGLResult(item.carbs_per_100g, item.gi);
     // when no input, show all
     if (searchPhrase === "") {
       return (
@@ -21,8 +24,11 @@ const GlycemicList = ({ searchPhrase, data, setClicked }) => {
             title={item.title}
             trackerItems={trackerItems}
             setTrackerItems={setTrackerItems}
+            setTotalCarbs={setTotalCarbs}
+            setTotalGILoad={setTotalGILoad}
             carbs_per_100g={item.carbs_per_100g}
             gi={item.gi}
+            gl={giLoad}
           />
         </Row>
       );
@@ -39,8 +45,11 @@ const GlycemicList = ({ searchPhrase, data, setClicked }) => {
             title={item.title}
             trackerItems={trackerItems}
             setTrackerItems={setTrackerItems}
+            setTotalCarbs={setTotalCarbs}
+            setTotalGILoad={setTotalGILoad}
             carbs_per_100g={item.carbs_per_100g}
             gi={item.gi}
+            gl={giLoad}
           />
         </Row>
       );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { withTheme } from "styled-components";
+import TrackerContext from "../TrackerContext";
 
 import {
   StyleSheet,
@@ -12,62 +13,55 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { getGLResult } from "../utils/GlycemicUtils";
+
 // Previous TouchableOpacity style was style={[styles.item]}
 // definition of the Item, which will be rendered in the FlatList
 const GlycemicItem = ({
   title,
   trackerItems,
   setTrackerItems,
+  setTotalCarbs,
+  setTotalGILoad,
   carbs_per_100g,
   gi,
+  gl,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const getGLResult = (carbs_per_100g, gi) => {
-    console.log("getGLResult, carbs_per_100g:" + carbs_per_100g + ", gi:" + gi);
-    const carbsRatio = +carbs_per_100g / 100;
-    const unit = "g"; // hard coding for now
-    const servingFactor = { g: 1, oz: 28.3495231 }[unit];
-    console.log(
-      "getGLResult, carbsRatio:" +
-        carbsRatio +
-        ", servingFactor:" +
-        servingFactor
-    );
-    const serving = 100; // hard coding for now
-
-    let gl = (gi * serving * carbsRatio * servingFactor) / 100;
-    console.log("getGLResult, gl1:" + gl);
-    gl = Math.round(gl * 100) / 100; //round 2 decimals
-    console.log("getGLResult, gl2:" + gl);
-
-    return gl;
-  };
-
-  console.log("carbs_per_100g:" + carbs_per_100g + ", gi:" + gi);
-  const gl = getGLResult(carbs_per_100g, gi);
-  console.log("getGLResult:" + gl);
+  const giLoad = getGLResult(carbs_per_100g, gi);
+  console.log("carbs_per_100g:" + carbs_per_100g + ", gi:" + gi + ", gl:" + gl);
   let indicatorToUse = "green";
-  if (gi > 60) {
+  if (giLoad > 60) {
     indicatorToUse = "red";
-  } else if (gi > 30) {
+  } else if (giLoad > 30) {
     indicatorToUse = "orange";
-  }
-  console.log("indicatorToUse:" + indicatorToUse);
-  // let iconToUse = <ImageBackground
-  //   source={require("../../assets/images/greenCircle.png")}
-  //   resizeMode="cover"
-  //   style={styles.image}
-  // >;
-
-  {
-    /* {isPreview ? <TodoRemaining /> : <TodoDone />} */
   }
 
   return (
     <TouchableOpacity
       onPress={() => {
-        setTrackerItems([...trackerItems, { id: title, title: title }]);
+        setTrackerItems([
+          ...trackerItems,
+          {
+            id: title,
+            title: title,
+            carbs_per_100g: carbs_per_100g,
+            gi: gi,
+            gl: gl,
+          },
+        ]);
+        let totalCarbs = 0;
+        let totalGILoad = 0;
+        trackerItems.map((trackerItem) => {
+          totalCarbs += trackerItem.carbs_per_100g;
+          totalGILoad += trackerItem.gl;
+        });
+
+        console.log("TrackerItem, totalCarbs:" + totalCarbs);
+        console.log("TrackerItem, totalGILoad:" + totalGILoad);
+        setTotalCarbs(totalCarbs);
+        setTotalGILoad(totalGILoad);
         setModalVisible(true);
       }}
     >

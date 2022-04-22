@@ -113,10 +113,19 @@ export default function App() {
 
   // const renderGlyItem = ({ item }) => <Item title={item.title} />;
   const [trackerItems, setTrackerItems] = useState([]);
+  const [totalCarbs, setTotalCarbs] = useState(0);
+  const [totalGILoad, setTotalGILoad] = useState(0);
   // the memoization is here to prevent is re-rendering needlessly
   const value = useMemo(
-    () => ({ trackerItems, setTrackerItems }),
-    [trackerItems]
+    () => ({
+      trackerItems,
+      setTrackerItems,
+      totalCarbs,
+      setTotalCarbs,
+      totalGILoad,
+      setTotalGILoad,
+    }),
+    [trackerItems, totalCarbs, totalGILoad]
   );
   console.log("App RENDER, trackerItems:" + JSON.stringify(trackerItems));
 

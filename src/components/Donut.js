@@ -30,8 +30,9 @@ export default function Donut({
   const halfCircle = radius + strokeWidth;
 
   const animation = (toValue) => {
+    console.log("animation, toValue:" + toValue);
     return Animated.timing(animated, {
-      delay: 1000,
+      delay: 500,
       toValue,
       duration,
       useNativeDriver: true,
