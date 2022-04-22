@@ -48,8 +48,8 @@ const chartConfigs = [
 ];
 
 const KetoLimitScreen = ({ totalCarbsForReals }) => {
-  const [totalCarbs, setTotalCarbs] = useState(0);
-  const handleChange = (v) => setTotalCarbs((v * 20).toFixed(0));
+  // const [totalCarbs, setTotalCarbs] = useState(0);
+  // const handleChange = (v) => setTotalCarbs((v * 20).toFixed(0));
 
   const { width } = Dimensions.get("window");
   const height = 256;
@@ -84,7 +84,7 @@ const KetoLimitScreen = ({ totalCarbsForReals }) => {
                   justifyContent: "center",
                 }}
               >
-                <FlashMessage duration={1000} />
+                <FlashMessage duration={300} />
                 <Text style={labelStyle}>Daily Carb Consumption</Text>
                 <StackedBarChart
                   style={graphStyle}
