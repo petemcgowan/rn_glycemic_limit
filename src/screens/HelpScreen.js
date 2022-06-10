@@ -1,75 +1,188 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { WebView } from "react-native-webview";
-import Constants from "expo-constants";
-import { useAssets } from "expo-asset";
-import { FileSystem } from "expo-file-system";
-import {
-  htmlData,
-  glycemicInfo2VeryBasic,
-  glycemicInfoToo,
-} from "../html/testSimple.js";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 
 function HelpScreen() {
-  // React.useEffect(() => {
-  //   async function getLocalHTML() {
-  //     const assets = useAssets(require("../assets/GlycemicInfo2.html"));
-  //     // const assets = useAssets(
-  //     //   require("../html/tester/GlycemicInfo2VeryBasic.html")
-  //     // );
-  //     // const assets = useAssets(
-  //     //   require("../html/Glycemic Index_ What It Is and How to Use It.html")
-  //     // );
-
-  //     const fileContents = await FileSystem.readAsStringAsync(file.localUri);
-  //     this._editorHtml = fileContents;
-  //   }
-  //   getLocalHTML();
-  // });
-
-  // string for testing
-  const customHTML = `
-      <body style="display:flex; flex-direction: column;justify-content: center;
-        align-items:center; background-color: black; color:white; height: 100%;">
-          <h1 style="font-size:100px; padding: 50px; text-align: center;"
-          id="h1_element">
-            This is simple html
-          </h1>
-          <h2 style="display: block; font-size:80px; padding: 50px;
-          text-align: center;" id="h2_element">
-            This text will be changed later!
-          </h2>
-       </body>`;
-
-  // console.log("HelpScreen, htmlData" + JSON.stringify(glycemicInfoToo));
-
   return (
-    // <WebView
-    //   style={styles.container}
-    //   source={{ uri: "https://www.healthline.com/nutrition/glycemic-index" }}
-    // />
-    <WebView style={styles.container} source={{ html: glycemicInfoToo }} />
+    <ScrollView style={styles.container}>
+      <Text style={styles.mainHeading}>
+        Glycemic Index: What It Is and How to Use It
+      </Text>
+      <Text style={styles.paragraph}>
+        The glycemic index is a tool that’s often used to promote better blood
+        sugar management.
+      </Text>
+      <Text style={styles.paragraph}>
+        Several factors influence the glycemic index of a food, including its
+        nutrient composition, cooking method, ripeness, and the amount of
+        processing it has undergone.
+      </Text>
+      <Text style={styles.paragraph}>
+        The glycemic index can not only help increase your awareness of what
+        you’re putting on your plate but also enhance weight loss, decrease your
+        blood sugar levels, and reduce your cholesterol.
+      </Text>
+      <Text style={styles.paragraph}>
+        This article takes a closer look at the glycemic index, including what
+        it is, how it can affect your health, and how to use it.
+      </Text>
+      <Image
+        style={styles.tinyLogo}
+        source={require("../../assets/images/breakfast-food-1296x728-header.jpg")}
+      />
+      <Text style={styles.subHeading}>What is the glycemic index?</Text>
+      <Text style={styles.paragraph}>
+        The glycemic index (GI) is a value used to measure how much specific
+        foods increase blood sugar levels.
+      </Text>
+      <Text style={styles.paragraph}>
+        Foods are classified as low, medium, or high glycemic foods and ranked
+        on a scale of 0–100.
+      </Text>
+      <Text style={styles.paragraph}>
+        The lower the GI of a specific food, the less it may affect your blood
+        sugar levels.
+      </Text>
+      <Text style={styles.paragraph}>Here are the three GI ratings:</Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.bulletPoint}>{"\u2B24"}</Text>
+        <Text style={{ fontWeight: "bold" }}>Low</Text>: 55 or less
+      </Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.bulletPoint}>{"\u2B24"}</Text>
+        <Text style={{ fontWeight: "bold" }}>Medium</Text>: 56–69
+      </Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.bulletPoint}>{"\u2B24"}</Text>
+        <Text style={{ fontWeight: "bold" }}>High</Text>: 70 or above
+      </Text>
+      <Text style={styles.paragraph}>
+        Foods high in refined carbs and sugar are digested more quickly and
+        often have a high GI, while foods high in protein, fat, or fiber
+        typically have a low GI. Foods that contain no carbs are not assigned a
+        GI and include meat, fish, poultry, nuts, seeds, herbs, spices, and
+        oils.
+      </Text>
+      <Text style={styles.paragraph}>
+        Other factors that affect the GI of a food include the ripeness, cooking
+        method, type of sugar it contains, and amount of processing it has
+        undergone.
+      </Text>
+      <Text style={styles.paragraph}>
+        Keep in mind that the glycemic index is different from the glycemic load
+        (GL).
+      </Text>
+      <Text style={styles.paragraph}>
+        Unlike the GI, which doesn’t take into account the amount of food eaten,
+        the GL factors in the number of carbs in a serving of a food to
+        determine how it may affect blood sugar levels.
+      </Text>
+      <Text style={styles.paragraph}>
+        For this reason, it’s important to take both the glycemic index and
+        glycemic load into consideration when selecting foods to help support
+        healthy blood sugar levels.
+      </Text>
+      <Text style={styles.summaryHeading}>Summary</Text>
+      <Text style={styles.summaryBox}>
+        The glycemic index is used to measure how much a specific food increases
+        your blood sugar levels. The higher the GI, the greater the effect on
+        blood sugar levels.
+      </Text>
+      <Text style={styles.subHeading}>Low glycemic diet</Text>
+      <Text style={styles.paragraph}>
+        The low glycemic diet involves swapping out foods with a high GI for
+        those with a lower GI.
+      </Text>
+      <Text style={styles.smallHeading}>Benefits</Text>
+      <Text style={styles.paragraph}>
+        Following a low glycemic diet may offer several health benefits,
+        including:
+      </Text>
+      <Text style={styles.paragraph}>
+        <Text style={{ fontWeight: "bold" }}>
+          <Text style={{ fontSize: 9 }}>{"\u2B24"}</Text>Improved blood sugar
+          regulation.
+        </Text>
+        Many studies have found that following a low GI diet may reduce blood
+        sugar levels and improve blood sugar management in people with type 2
+        diabetes
+      </Text>
+      <Text style={styles.paragraph}>
+        <Text style={{ fontWeight: "bold" }}>
+          <Text style={{ fontSize: 9 }}>{"\u2B24"}</Text>Increased weight loss.
+        </Text>
+        Some research shows that following a low GI diet may increase short-term
+        weight loss. More studies are needed to determine how it affects
+        long-term weight management
+      </Text>
+      <Text style={styles.paragraph}>
+        <Text style={{ fontWeight: "bold" }}>
+          <Text style={{ fontSize: 9 }}>{"\u2B24"}</Text>Reduced cholesterol
+          levels.
+        </Text>
+        Following a low GI diet may help lower levels of both total and LDL
+        (bad) cholesterol, both of which are risk factors for heart disease
+      </Text>
+      <Text style={styles.summaryHeading}>Summary</Text>
+      <Text style={styles.summaryBox}>
+        Following a low glycemic diet involves swapping out foods that have a
+        high GI with low GI alternatives. A low glycemic diet may help manage
+        blood sugar levels, reduce your cholesterol, and boost short-term weight
+        loss.
+      </Text>
+    </ScrollView>
   );
 }
-
-// <WebView style={styles.container} source={{ html: this._editorHtml }} />
 
 export default HelpScreen;
 
 const styles = StyleSheet.create({
-  root: {
-    backgroundColor: "#222",
+  container: {
+    backgroundColor: "white",
+  },
+  paragraph: {
+    lineHeight: 18,
+    marginBottom: 12,
+  },
+  mainHeading: {
+    fontWeight: "bold",
+    fontSize: 18,
+    marginBottom: 12,
+  },
+  subHeading: {
+    fontWeight: "bold",
+    fontSize: 16,
+    marginBottom: 12,
+  },
+  smallHeading: {
+    fontWeight: "bold",
+    fontSize: 14,
+    marginBottom: 12,
+  },
+  summaryHeading: {
+    textTransform: "uppercase",
+    color: "#f0533a",
+    lineHeight: 26,
+    marginBottom: 6,
+    backgroundColor: "#f7f7f7",
+  },
+  summaryBox: {
+    lineHeight: 22,
+    backgroundColor: "#f7f7f7",
+    marginBottom: 12,
   },
   text: {
     color: "#FFF",
     fontFamily: "Karla_300Light",
     fontSize: 16,
   },
-  container: {
-    color: "#FFF",
-    fontFamily: "Karla_300Light",
-    fontSize: 16,
-    flex: 1,
-    marginTop: Constants.statusBarHeight,
+  tinyLogo: {
+    width: 324,
+    height: 182,
+    alignSelf: "center",
+    marginBottom: 12,
+  },
+  bulletPoint: {
+    color: "orange",
+    fontSize: 9,
   },
 });
