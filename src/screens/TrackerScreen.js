@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   root: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#222",
+    backgroundColor: "black",
     color: "#FFF",
   },
 });

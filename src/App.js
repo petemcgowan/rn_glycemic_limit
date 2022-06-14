@@ -24,7 +24,8 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     // primary: "rgb(255, 45, 85)",
-    background: "rgb(34, 34, 34)",
+    // background: "rgb(34, 34, 34)",
+    background: "black",
   },
 };
 
@@ -35,10 +36,10 @@ function AppTabs() {
 
   return (
     <Tab.Navigator
-      style={styles.root}
+      style={styles.container}
       screenOptions={{
         cardStyle: {
-          backgroundColor: "#222",
+          backgroundColor: "black",
         },
         tabBarShowLabel: false,
       }}
@@ -50,8 +51,12 @@ function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="search" size={24} color="orange" />
           ),
+          headerStyle: {
+            backgroundColor: "#f4511e",
+          },
           tabBarItemStyle: {
-            backgroundColor: "#ff15",
+            backgroundColor: "#1b1344",
+            // backgroundColor: "#ff15",
           },
         }}
       />
@@ -63,11 +68,15 @@ function AppTabs() {
             <FontAwesome name="star" size={24} color="orange" />
           ),
           tabBarBadge: trackerItems.length,
+          headerStyle: {
+            backgroundColor: "#f4511e",
+          },
           tabBarItemStyle: {
-            backgroundColor: "#1344",
+            backgroundColor: "#1b1344",
+            // backgroundColor: "#1344",
           },
           tabBarBadgeStyle: {
-            backgroundColor: "#334444",
+            backgroundColor: "#1b1344",
             color: "#BBBBBB",
           },
         }}
@@ -79,6 +88,9 @@ function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="ban" size={24} color="orange" />
           ),
+          headerStyle: {
+            backgroundColor: "#f4511e",
+          },
           tabBarItemStyle: {
             backgroundColor: "#1b1344",
           },
@@ -91,6 +103,9 @@ function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="question-circle" size={24} color="orange" />
           ),
+          headerStyle: {
+            backgroundColor: "#f4511e",
+          },
           tabBarItemStyle: {
             backgroundColor: "#1b1344",
           },
@@ -138,8 +153,8 @@ export default function App() {
       // </View>
       <ThemeContextProvider>
         <TrackerProvider value={value}>
-          <NavigationContainer theme={MyTheme} style={styles.root}>
-            <AppTabs style={styles.root} />
+          <NavigationContainer theme={MyTheme} style={styles.container}>
+            <AppTabs style={styles.container} />
           </NavigationContainer>
         </TrackerProvider>
       </ThemeContextProvider>
@@ -148,8 +163,8 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  root: {
-    backgroundColor: "#222",
+  container: {
+    backgroundColor: "black",
     color: "#FFF",
     fontFamily: "Karla_300Light",
   },

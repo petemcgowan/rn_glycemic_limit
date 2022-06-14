@@ -13,20 +13,13 @@ import SearchBar from "../components/SearchBar";
 import glycemicPrunedData from "../data/glycemic_pruned.json";
 import styled, { withTheme } from "styled-components";
 
-const ListTitle = styled(Text)`
-  margin-bottom: ${({ theme }) => theme.metrics.extraSmallSize}px;
-  font-family: CircularStd-Bold;
-  font-size: ${({ theme }) => theme.metrics.largeSize * 1.1}px;
-  color: ${({ theme }) => theme.colors.textColor};
-`;
-
 const SearchScreen = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
 
   return (
     <View>
-      <SafeAreaView style={styles.root}>
+      <SafeAreaView style={styles.searchPageContainer}>
         {!clicked && <ListTitle>Glycemic Index</ListTitle>}
 
         <SearchBar
@@ -51,12 +44,19 @@ const SearchScreen = () => {
 
 export default withTheme(SearchScreen);
 
+const ListTitle = styled(Text)`
+  margin-bottom: ${({ theme }) => theme.metrics.extraSmallSize}px;
+  font-family: CircularStd-Bold;
+  font-size: ${({ theme }) => theme.metrics.largeSize * 1.1}px;
+  color: ${({ theme }) => theme.colors.textColor};
+`;
+
 const styles = StyleSheet.create({
-  root: {
+  searchPageContainer: {
     justifyContent: "center",
     alignItems: "center",
     color: "#FFF",
-    backgroundColor: "#222",
+    backgroundColor: "#000",
   },
   title: {
     fontFamily: "Karla_300Light",

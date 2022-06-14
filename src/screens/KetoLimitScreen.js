@@ -25,7 +25,8 @@ import { StackedBarChart } from "react-native-chart-kit";
 
 const chartConfigs = [
   {
-    backgroundColor: "#011000",
+    // backgroundColor: "#011000",
+    backgroundColor: "black",
     // backgroundColor: "#022173",
     backgroundGradientFrom: "#1E2923",
     // backgroundGradientFrom: "#022173",
@@ -117,7 +118,8 @@ const styles = StyleSheet.create({
   root: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#222",
+    backgroundColor: "black",
+
     color: "#FFF",
     fontFamily: "Karla_300Light",
   },
