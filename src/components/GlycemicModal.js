@@ -14,9 +14,9 @@ import { withTheme } from "styled-components";
 const GlycemicModal = ({
   modalVisible,
   setModalVisible,
-  title,
-  carbs_per_100g,
-  gi,
+  description,
+  carbAmt,
+  giAmt,
   giLoad,
   imageToUse,
 }) => {
@@ -40,7 +40,7 @@ const GlycemicModal = ({
         }}
       >
         <View>
-          <Text>{title}</Text>
+          <Text>{description}</Text>
         </View>
         <View style={styles.modalView}>
           <View style={{ flexDirection: "row", flex: 0.5 }}>
@@ -49,7 +49,7 @@ const GlycemicModal = ({
               resizeMode="cover"
               style={styles.image}
             >
-              <Text style={styles.text}>{carbs_per_100g}</Text>
+              <Text style={styles.text}>{carbAmt}</Text>
             </ImageBackground>
             <Text>Carbs</Text>
           </View>
@@ -59,7 +59,7 @@ const GlycemicModal = ({
               resizeMode="cover"
               style={styles.image}
             >
-              <Text style={styles.text}>{gi}</Text>
+              <Text style={styles.text}>{giAmt}</Text>
             </ImageBackground>
             <Text>GI </Text>
           </View>

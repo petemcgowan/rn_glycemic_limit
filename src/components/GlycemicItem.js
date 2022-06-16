@@ -17,20 +17,32 @@ import GlycemicModal from "./GlycemicModal";
 // Previous TouchableOpacity style was style={[styles.item]}
 // definition of the Item, which will be rendered in the FlatList
 const GlycemicItem = ({
-  title,
+  description,
   trackerItems,
   setTrackerItems,
   setTotalCarbs,
   setTotalGILoad,
-  carbs_per_100g,
-  gi,
-  gl,
+  carbAmt,
+  giAmt,
+  glAmt,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const giLoad = getGLResult(carbs_per_100g, gi);
-  console.log("carbs_per_100g:" + carbs_per_100g + ", gi:" + gi + ", gl:" + gl);
+  /* Glycemic Index ranges
+  **Low** GI foods and drinks have a GI value **less than or equal to 55** and are characterised by a smaller rise and fall in blood glucose.
+
+  **High** GI foods and drinks have a GI value **greater than or equal to 70** and are characterised by faster and higher peaks and troughs in blood glucose levels.
+
+  **Medium** GI foods and drinks have a GI value **between 56 and 69.**
+  */
+
+  //TODO   Add extra info to the modal.  Maybe have the modal only be called using a button?  What do apps normally do?  I'm adding to a "crate", who else does that.
+  // TODO Modal styling.  Black background, white writing, Change the blue button to something green, less gawdy.
+
+  const giLoad = getGLResult(carbAmt, giAmt);
+  console.log("carbAmt:" + carbAmt + ", giAmt:" + giAmt + ", glAmt:" + glAmt);
   let indicatorToUse = "green";
+  // Glycemic Index ranges
   let imageToUse = require("../../assets/images/greenCircle.png");
   if (giLoad > 60) {
     indicatorToUse = "red";
@@ -40,24 +52,29 @@ const GlycemicItem = ({
     imageToUse = require("../../assets/images/orangeCircle.png");
   }
 
+  /* Glycemic Load ranges
+  "Low-GL foods are those with a** GL of 10 and below**, medium are those between **11 and 19**, and high are those with a GL of **20 and above**.
+
+  Excerpt From: Mabel Blades. “The Glycemic Load Counter”.  */
+
   return (
     <TouchableOpacity
       onPress={() => {
         setTrackerItems([
           ...trackerItems,
           {
-            id: title,
-            title: title,
-            carbs_per_100g: carbs_per_100g,
-            gi: gi,
-            gl: gl,
+            id: description,
+            description: description,
+            carbAmt: carbAmt,
+            giAmt: giAmt,
+            glAmt: glAmt,
           },
         ]);
         let totalCarbs = 0;
         let totalGILoad = 0;
         trackerItems.map((trackerItem) => {
-          totalCarbs += trackerItem.carbs_per_100g;
-          totalGILoad += trackerItem.gl;
+          totalCarbs += trackerItem.carbAmt;
+          totalGILoad += trackerItem.glAmt;
         });
 
         console.log("TrackerItem, totalCarbs:" + totalCarbs);
@@ -71,13 +88,13 @@ const GlycemicItem = ({
         <GlycemicModal
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          title={title}
-          carbs_per_100g={carbs_per_100g}
-          gi={gi}
+          description={description}
+          carbAmt={carbAmt}
+          giAmt={giAmt}
           giLoad={giLoad}
           imageToUse={imageToUse}
         />
-        <ListItem>{title}</ListItem>
+        <ListItem>{description}</ListItem>
         <View>
           <View
             style={{
@@ -91,7 +108,7 @@ const GlycemicItem = ({
               resizeMode="cover"
               style={styles.image}
             >
-              <Text style={styles.text}>{gi}</Text>
+              <Text style={styles.text}>{giAmt}</Text>
             </ImageBackground>
           </View>
         </View>

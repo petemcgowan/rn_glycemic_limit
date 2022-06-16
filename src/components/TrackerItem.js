@@ -16,10 +16,12 @@ const TrackerItem = ({ item }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log("TrackerItem, onPress, gonna remove, title:" + item.title);
+        console.log(
+          "TrackerItem, onPress, gonna remove, description:" + item.description
+        );
 
         for (var i = 0; i < trackerItems.length; i++) {
-          if (trackerItems[i].title === item.title) {
+          if (trackerItems[i].description === item.description) {
             console.log(
               "Item found, i:" +
                 i +
@@ -38,8 +40,8 @@ const TrackerItem = ({ item }) => {
         let totalCarbs = 0;
         let totalGILoad = 0;
         trackerItems.map((trackerItem) => {
-          totalCarbs += trackerItem.carbs_per_100g;
-          totalGILoad += trackerItem.gi;
+          totalCarbs += trackerItem.carbAmt;
+          totalGILoad += trackerItem.giAmt;
         });
 
         console.log("TrackerItem, totalCarbs:" + totalCarbs);
@@ -50,8 +52,8 @@ const TrackerItem = ({ item }) => {
       style={[styles.item]}
     >
       <View>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.title}>{item.carbs_per_100g}</Text>
+        <Text style={styles.description}>{item.description}</Text>
+        <Text style={styles.description}>{item.carbAmt}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -60,7 +62,7 @@ const TrackerItem = ({ item }) => {
 export default withTheme(TrackerItem);
 
 const styles = StyleSheet.create({
-  title: {
+  description: {
     fontFamily: "Karla_300Light",
     width: "100%",
     color: "#FFF",

@@ -126,7 +126,7 @@ export default function App() {
     "Modesta-Script": require("../assets/fonts/Modesta-Script.ttf"),
   });
 
-  // const renderGlyItem = ({ item }) => <Item title={item.title} />;
+  // const renderGlyItem = ({ item }) => <Item description={item.description} />;
   const [trackerItems, setTrackerItems] = useState([]);
   const [totalCarbs, setTotalCarbs] = useState(0);
   const [totalGILoad, setTotalGILoad] = useState(0);

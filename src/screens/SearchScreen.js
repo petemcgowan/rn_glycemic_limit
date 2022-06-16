@@ -10,7 +10,7 @@ import {
 
 import GlycemicList from "../components/GlycemicList";
 import SearchBar from "../components/SearchBar";
-import glycemicPrunedData from "../data/glycemic_pruned.json";
+import glycemicPrunedData from "../data/usdaNutrition.json";
 import styled, { withTheme } from "styled-components";
 
 const SearchScreen = () => {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     backgroundColor: "#000",
   },
-  title: {
+  description: {
     fontFamily: "Karla_300Light",
     width: "100%",
     marginTop: 20,

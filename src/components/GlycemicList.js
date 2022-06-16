@@ -15,41 +15,41 @@ const GlycemicList = ({ searchPhrase, data, setClicked }) => {
 
   // item is an entry in the glycemicPrunedData/data list
   const renderItem = ({ item }) => {
-    const giLoad = getGLResult(item.carbs_per_100g, item.gi);
+    const giLoad = getGLResult(item.carbAmt, item.giAmt);
     // when no input, show all
     if (searchPhrase === "") {
       return (
         <Row>
           <GlycemicItem
-            title={item.title}
+            description={item.description}
             trackerItems={trackerItems}
             setTrackerItems={setTrackerItems}
             setTotalCarbs={setTotalCarbs}
             setTotalGILoad={setTotalGILoad}
-            carbs_per_100g={item.carbs_per_100g}
-            gi={item.gi}
-            gl={giLoad}
+            carbAmt={item.carbAmt}
+            giAmt={item.giAmt}
+            glAmt={giLoad}
           />
         </Row>
       );
     }
-    // filter of the title
+    // filter of the description
     if (
-      item.title
+      item.description
         .toUpperCase()
         .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
     ) {
       return (
         <Row>
           <GlycemicItem
-            title={item.title}
+            description={item.description}
             trackerItems={trackerItems}
             setTrackerItems={setTrackerItems}
             setTotalCarbs={setTotalCarbs}
             setTotalGILoad={setTotalGILoad}
-            carbs_per_100g={item.carbs_per_100g}
-            gi={item.gi}
-            gl={giLoad}
+            carbAmt={item.carbAmt}
+            giAmt={item.giAmt}
+            glAmt={giLoad}
           />
         </Row>
       );
@@ -66,7 +66,7 @@ const GlycemicList = ({ searchPhrase, data, setClicked }) => {
         <FlatList
           data={data}
           renderItem={renderItem}
-          keyExtractor={(item) => item.title}
+          keyExtractor={(item) => item.description}
         />
       </View>
     </SafeAreaView>
@@ -77,7 +77,7 @@ export default withTheme(GlycemicList);
 
 /*********************************
  * Convert Text item to styled components
- *    OptionTitle (in Settings) is the setting title
+ *    OptionTitle (in Settings) is the setting description
  *    OptionDescription is the description.
  *    So basically try Description for your text and
  * Convert existing **FlatList to sc** (in GlycemicList)
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   //   borderBottomWidth: 2,
   //   borderBottomColor: "lightgrey",
   // },
-  // title: {
+  // description: {
   //   fontFamily: "Karla_300Light",
   //   fontSize: 18,
   //   color: "#FFF",
