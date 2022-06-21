@@ -10,12 +10,14 @@ import {
 
 import GlycemicList from "../components/GlycemicList";
 import SearchBar from "../components/SearchBar";
-import glycemicPrunedData from "../data/usdaNutrition.json";
+import glycemicData from "../data/usdaNutrition.json";
 import styled, { withTheme } from "styled-components";
 
 const SearchScreen = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
+
+  console.log("glycemicData:" + JSON.stringify(glycemicData));
 
   return (
     <View>
@@ -28,12 +30,12 @@ const SearchScreen = () => {
           clicked={clicked}
           setClicked={setClicked}
         />
-        {!glycemicPrunedData ? (
+        {!glycemicData ? (
           <ActivityIndicator size="large" />
         ) : (
           <GlycemicList
             searchPhrase={searchPhrase}
-            data={glycemicPrunedData}
+            glycemicData={glycemicData}
             setClicked={setClicked}
           />
         )}
