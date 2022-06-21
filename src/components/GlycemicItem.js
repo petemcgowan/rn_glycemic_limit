@@ -25,37 +25,50 @@ const GlycemicItem = ({
   carbAmt,
   giAmt,
   glAmt,
+  fiberAmt,
+  proteinAmt,
+  fatAmt,
+  energyAmt,
+  sugarsAmt,
+  sodiumAmt,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   /* Glycemic Index ranges
-  **Low** GI foods and drinks have a GI value **less than or equal to 55** and are characterised by a smaller rise and fall in blood glucose.
-
-  **High** GI foods and drinks have a GI value **greater than or equal to 70** and are characterised by faster and higher peaks and troughs in blood glucose levels.
-
-  **Medium** GI foods and drinks have a GI value **between 56 and 69.**
-  */
-
-  //TODO   Add extra info to the modal.  Maybe have the modal only be called using a button?  What do apps normally do?  I'm adding to a "crate", who else does that.
-  // TODO Modal styling.  Black background, white writing, Change the blue button to something green, less gawdy.
-
-  const giLoad = getGLResult(carbAmt, giAmt);
-  console.log("carbAmt:" + carbAmt + ", giAmt:" + giAmt + ", glAmt:" + glAmt);
-  let indicatorToUse = "green";
-  // Glycemic Index ranges
-  let imageToUse = require("../../assets/images/greenCircle.png");
-  if (giLoad > 60) {
-    indicatorToUse = "red";
-    imageToUse = require("../../assets/images/redCircle.png");
-  } else if (giLoad > 30) {
-    indicatorToUse = "orange";
-    imageToUse = require("../../assets/images/orangeCircle.png");
+   **Low**  **less than or equal to 55** and are characterised by a smaller rise and fall in blood glucose.
+   **Medium** Value **between 56 and 69.**
+   **High** GI foods and drinks have a GI value **greater than or equal to 70** and are characterised by faster and higher peaks and troughs in blood glucose levels.*/
+  let giImageToUse = require("../../assets/images/greenCircle.png");
+  if (glAmt > 60) {
+    //red
+    giImageToUse = require("../../assets/images/redCircle.png");
+  } else if (glAmt > 30) {
+    //orange
+    giImageToUse = require("../../assets/images/orangeCircle.png");
   }
 
-  /* Glycemic Load ranges
-  "Low-GL foods are those with a** GL of 10 and below**, medium are those between **11 and 19**, and high are those with a GL of **20 and above**.
+  /* Glycemic Load ranges (GL)
+  "Low-GL foods are those with a** GL of 10 and below**, medium are those between **11 and 19**, and high are those with a GL of **20 and above** (Mabel Blades. “The Glycemic Load Counter”.  */
+  let glImageToUse = require("../../assets/images/greenCircle.png");
+  if (glAmt > 19) {
+    //red
+    glImageToUse = require("../../assets/images/redCircle.png");
+  } else if (glAmt > 10) {
+    //orange
+    glImageToUse = require("../../assets/images/orangeCircle.png");
+  }
 
-  Excerpt From: Mabel Blades. “The Glycemic Load Counter”.  */
+  // Carb ranges (keto watch outs)
+  let carbImageToUse = require("../../assets/images/greenCircle.png");
+  if (carbAmt > 22) {
+    //red
+    carbImageToUse = require("../../assets/images/redCircle.png");
+  } else if (carbAmt > 11) {
+    //orange
+    carbImageToUse = require("../../assets/images/orangeCircle.png");
+  }
+
+  console.log("carbAmt:" + carbAmt + ", giAmt:" + giAmt + ", glAmt:" + glAmt);
 
   return (
     <TouchableOpacity
@@ -89,26 +102,68 @@ const GlycemicItem = ({
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           description={description}
-          carbAmt={carbAmt}
           giAmt={giAmt}
-          giLoad={giLoad}
-          imageToUse={imageToUse}
+          carbAmt={carbAmt}
+          glAmt={glAmt}
+          fiberAmt={fiberAmt}
+          proteinAmt={proteinAmt}
+          fatAmt={fatAmt}
+          energyAmt={energyAmt}
+          sugarsAmt={sugarsAmt}
+          sodiumAmt={sodiumAmt}
+          giImageToUse={giImageToUse}
+          glImageToUse={glImageToUse}
+          carbImageToUse={carbImageToUse}
         />
         <ListItem>{description}</ListItem>
         <View>
           <View
             style={{
-              backgroundColor: "orange",
+              backgroundColor: "black",
               flex: 1,
               alignItems: "center",
             }}
           >
             <ImageBackground
-              source={imageToUse}
+              source={giImageToUse}
               resizeMode="cover"
               style={styles.image}
             >
               <Text style={styles.text}>{giAmt}</Text>
+            </ImageBackground>
+          </View>
+        </View>
+        <View>
+          <View
+            style={{
+              backgroundColor: "black",
+              flex: 1,
+              alignItems: "center",
+            }}
+          >
+            <ImageBackground
+              source={glImageToUse}
+              resizeMode="cover"
+              style={styles.image}
+            >
+              <Text style={styles.text}>{glAmt}</Text>
+            </ImageBackground>
+          </View>
+        </View>
+        <View>
+          <View
+            style={{
+              backgroundColor: "black",
+              flex: 1,
+              alignItems: "center",
+            }}
+          >
+            <ImageBackground
+              source={carbImageToUse}
+              resizeMode="cover"
+              style={styles.image}
+            >
+              <Text style={styles.text}>{carbAmt}</Text>
             </ImageBackground>
           </View>
         </View>
@@ -132,7 +187,7 @@ const ListItem = styled(Text)`
   margin: 3px;
   width: 60%;
   /* font-family: Modesta-Script; */
-  font-size: ${({ theme }) => theme.metrics.mediumSize * 1.5}px;
+  font-size: ${({ theme }) => theme.metrics.mediumSize * 1.25}px;
   /* color: ${({ theme }) => theme.colors.subTextColor}; */
   color: white;
 `;
@@ -149,12 +204,12 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     // justifyContent: "center",
-    width: 24, //24
-    height: 24, //24
+    width: 26, //24
+    height: 26, //24
   },
   text: {
     color: "white",
-    fontSize: 14,
+    fontSize: 13,
     // lineHeight: 20,
     fontWeight: "bold",
     textAlign: "center",
