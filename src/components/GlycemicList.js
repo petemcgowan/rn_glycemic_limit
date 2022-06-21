@@ -7,15 +7,15 @@ import GlycemicItem from "./GlycemicItem";
 import { getGLResult } from "../utils/GlycemicUtils";
 
 // the filter
-const GlycemicList = ({ searchPhrase, data, setClicked }) => {
+const GlycemicList = ({ searchPhrase, glycemicData, setClicked }) => {
   const { trackerItems, setTrackerItems, setTotalCarbs, setTotalGILoad } =
     useContext(TrackerContext);
 
   console.log("List, searchPhrase:" + searchPhrase);
 
-  // item is an entry in the glycemicPrunedData/data list
+  // item is an entry in the glycemicData/data list
   const renderItem = ({ item }) => {
-    const giLoad = getGLResult(item.carbAmt, item.giAmt);
+    // const giLoad = getGLResult(item.carbAmt, item.giAmt, item.glAmt);
     // when no input, show all
     if (searchPhrase === "") {
       return (
@@ -26,9 +26,15 @@ const GlycemicList = ({ searchPhrase, data, setClicked }) => {
             setTrackerItems={setTrackerItems}
             setTotalCarbs={setTotalCarbs}
             setTotalGILoad={setTotalGILoad}
-            carbAmt={item.carbAmt}
+            carbAmt={Math.round(item.carbAmt)}
             giAmt={item.giAmt}
-            glAmt={giLoad}
+            glAmt={item.glAmt}
+            fiberAmt={item.fiberAmt}
+            proteinAmt={item.proteinAmt}
+            fatAmt={item.fatAmt}
+            energyAmt={item.energyAmt}
+            sugarsAmt={item.sugarsAmt}
+            sodiumAmt={item.sodiumAmt}
           />
         </Row>
       );
@@ -47,9 +53,15 @@ const GlycemicList = ({ searchPhrase, data, setClicked }) => {
             setTrackerItems={setTrackerItems}
             setTotalCarbs={setTotalCarbs}
             setTotalGILoad={setTotalGILoad}
-            carbAmt={item.carbAmt}
+            carbAmt={Math.round(item.carbAmt)}
             giAmt={item.giAmt}
-            glAmt={giLoad}
+            glAmt={item.glAmt}
+            fiberAmt={item.fiberAmt}
+            proteinAmt={item.proteinAmt}
+            fatAmt={item.fatAmt}
+            energyAmt={item.energyAmt}
+            sugarsAmt={item.sugarsAmt}
+            sodiumAmt={item.sodiumAmt}
           />
         </Row>
       );
@@ -64,7 +76,7 @@ const GlycemicList = ({ searchPhrase, data, setClicked }) => {
         }}
       >
         <FlatList
-          data={data}
+          data={glycemicData}
           renderItem={renderItem}
           keyExtractor={(item) => item.description}
         />
@@ -95,7 +107,7 @@ align-items: center; */
 const styles = StyleSheet.create({
   list__container: {
     margin: 10,
-    height: "65%",
+    height: "85%",
     width: "100%",
   },
 
