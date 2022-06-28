@@ -22,7 +22,9 @@ import {
 } from "../data/chartData";
 
 import { StackedBarChart } from "react-native-chart-kit";
+import LineChartContainer from "../components/LineChartContainer";
 
+// for reference only, this is the old chart config
 const chartConfigs = [
   {
     // backgroundColor: "#011000",
@@ -49,9 +51,6 @@ const chartConfigs = [
 ];
 
 const KetoLimitScreen = ({ totalCarbsForReals }) => {
-  // const [totalCarbs, setTotalCarbs] = useState(0);
-  // const handleChange = (v) => setTotalCarbs((v * 20).toFixed(0));
-
   const { width } = Dimensions.get("window");
   const height = 256;
 
@@ -59,58 +58,11 @@ const KetoLimitScreen = ({ totalCarbsForReals }) => {
     <View>
       <SafeAreaView style={styles.root}>
         <DonutFactory />
-        {chartConfigs.map((chartConfig) => {
-          console.log(JSON.stringify(chartConfig));
-          const labelStyle = {
-            color: chartConfig.color(),
-            marginVertical: 10,
-            textAlign: "center",
-            fontSize: 16,
-            fontFamily: "Karla_300Light",
-          };
-          const graphStyle = {
-            marginVertical: 8,
-            ...chartConfig.style,
-          };
-          return (
-            <ScrollView
-              key={Math.random()}
-              style={{
-                backgroundColor: chartConfig.backgroundColor,
-              }}
-            >
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FlashMessage duration={300} />
-                <Text style={labelStyle}>Daily Carb Consumption</Text>
-                <StackedBarChart
-                  style={graphStyle}
-                  data={stackedBarGraphDataSmaller}
-                  width={width * 0.82}
-                  withInnerLines={false}
-                  withOuterLines={false}
-                  withVerticalLines={false}
-                  withHorizontalLines={false}
-                  withDots={false}
-                  height={220}
-                  chartConfig={chartConfig}
-                />
-              </View>
-            </ScrollView>
-          );
-        })}
+        <LineChartContainer />
       </SafeAreaView>
     </View>
   );
 };
-
-// .map((item) => {
-//   return <Text>test</Text>
-// });
 
 export default KetoLimitScreen;
 

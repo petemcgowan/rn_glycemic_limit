@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
     // flex: 1,
     // justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
+    backgroundColor: "#000",
     padding: 8,
   },
   paragraph: {

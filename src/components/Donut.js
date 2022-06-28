@@ -64,7 +64,7 @@ export default function Donut({
     return () => {
       animated.removeAllListeners();
     };
-  });
+  }, []);
 
   return (
     <View style={{ width: radius * 2, height: radius * 2 }}>

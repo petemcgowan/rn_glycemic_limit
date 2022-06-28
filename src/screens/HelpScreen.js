@@ -137,15 +137,22 @@ export default HelpScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    //    backgroundColor: "#f7f7f7",
+    backgroundColor: "#011",
+    // backgroundColor: "white",
   },
   paragraph: {
     lineHeight: 18,
+    color: "#FFF",
     marginBottom: 12,
   },
   mainHeading: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 16,
+    textAlign: "center",
+    paddingTop: 10,
+    paddingRight: 10,
+    color: "#FFF",
     marginBottom: 12,
   },
   subHeading: {
@@ -163,11 +170,13 @@ const styles = StyleSheet.create({
     color: "#f0533a",
     lineHeight: 26,
     marginBottom: 6,
-    backgroundColor: "#f7f7f7",
+    //    backgroundColor: "#f7f7f7",
+    backgroundColor: "#000",
   },
   summaryBox: {
     lineHeight: 22,
-    backgroundColor: "#f7f7f7",
+    //    backgroundColor: "#f7f7f7",
+    backgroundColor: "#000",
     marginBottom: 12,
   },
   text: {
