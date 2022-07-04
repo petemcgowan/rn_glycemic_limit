@@ -35,11 +35,11 @@ const LineChart: FC<LineChartProps> = ({
   const isAnimationComplete = useSharedValue(true);
   const transition = useSharedValue(1);
 
-  const onQuarterTapped = (quarter: number) => {
+  const onDayTapped = (day: number) => {
     if (isAnimationComplete.value) {
       isAnimationComplete.value = false;
       transition.value = 0;
-      selectedGraph.value = data[quarter - 1];
+      selectedGraph.value = data[day - 1];
 
       transition.value = withTiming(1, {}, () => {
         previousGraph.value = selectedGraph.value;
@@ -62,10 +62,10 @@ const LineChart: FC<LineChartProps> = ({
     return `$${selectedGraph.value.mostRecent}`;
   });
 
-  const q1Tapped = () => onQuarterTapped(1);
-  const q2Tapped = () => onQuarterTapped(2);
-  const q3Tapped = () => onQuarterTapped(3);
-  const q4Tapped = () => onQuarterTapped(4);
+  const d1Tapped = () => onDayTapped(1);
+  const d2Tapped = () => onDayTapped(2);
+  const d3Tapped = () => onDayTapped(3);
+  const d4Tapped = () => onDayTapped(4);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -105,10 +105,10 @@ const LineChart: FC<LineChartProps> = ({
         </Svg>
       </Animated.View>
       <ButtonSection
-        q1Tapped={q1Tapped}
-        q2Tapped={q2Tapped}
-        q3Tapped={q3Tapped}
-        q4Tapped={q4Tapped}
+        d1Tapped={d1Tapped}
+        d2Tapped={d2Tapped}
+        d3Tapped={d3Tapped}
+        d4Tapped={d4Tapped}
       />
     </SafeAreaView>
   );

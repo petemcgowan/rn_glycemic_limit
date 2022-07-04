@@ -1,5 +1,5 @@
 import {curveBasis, line, scaleLinear, scaleTime} from 'd3';
-import React from 'react';
+import React, { useContext } from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
 
 import {parse, Path as RePath} from 'react-native-redash';
@@ -13,6 +13,7 @@ import {
   originalData,
 } from './Data';
 import LineChart from './LineChart';
+import TrackerContext from "../TrackerContext";
 
 const {width} = Dimensions.get('screen');
 
@@ -28,9 +29,11 @@ export type GraphData = {
   mostRecent: number;
 };
 
+
+
 const makeGraph = (data: DataPoint[]) => {
-  const max = Math.max(...data.map(val => val.value));
-  const min = Math.min(...data.map(val => val.value));
+  const max = Math.max(...data.map(val => val.carbAmt));
+  const min = Math.min(...data.map(val => val.carbAmt));
   const y = scaleLinear().domain([0, max]).range([GRAPH_HEIGHT, 35]);
 
   const x = scaleTime()
@@ -39,25 +42,57 @@ const makeGraph = (data: DataPoint[]) => {
 
   const curvedLine = line<DataPoint>()
     .x(d => x(new Date(d.date)))
-    .y(d => y(d.value))
+    .y(d => y(d.carbAmt))
     .curve(curveBasis)(data);
 
   return {
     max,
     min,
     curve: parse(curvedLine!),
-    mostRecent: data[data.length - 1].value,
+    mostRecent: data[data.length - 1].carbAmt,
   };
+
+}
+
+const makeGraphPete = (data: DataPoint[], trackerItems: any) => {
+
+  console.log ("trackerItems:" + JSON.stringify(trackerItems));
+  console.log ("data BEFORE:" + JSON.stringify(data));
+
+  data.forEach ((element: DataPoint, index: number, array: any) => {
+    console.log('index:' + index + ', data[' + index + '] = ' + JSON.stringify(element));
+
+    console.log ("trackerItems[index]:" + JSON.stringify(trackerItems[index]));
+    //replacing dummy value with real value
+    const trackerObj = trackerItems[index];
+    if ((trackerObj !== undefined) && (index < trackerItems.length)) {
+      console.log ("Replacing element.carbAmt:" + element.carbAmt + ", with:" + trackerObj.carbAmt );
+      element.carbAmt = trackerObj.carbAmt;
+      console.log ("Setting real value, element:" + JSON.stringify(element) );
+      array[index] = element;
+    }
+    else {  //zero it out
+      element.carbAmt = 0;
+      array[index] = element;
+    }
+  });
+  console.log ("data AFTER:" + JSON.stringify(data));
+
+  return makeGraph (data);
 };
 
-const graphData: GraphData[] = [
-  makeGraph(originalData),
-  makeGraph(animatedData),
-  makeGraph(animatedData2),
-  makeGraph(animatedData3),
-];
+let graphData: GraphData[] = [];
 
-const LineChartContainer = () => {
+const LineChartContainer = ({trackerItems}: any) => {
+  console.log ("trackerContext.trackerItems:" + JSON.stringify(trackerItems));
+
+  graphData = [
+    makeGraphPete(originalData, trackerItems),
+    makeGraph(animatedData),
+    makeGraph(animatedData2),
+    makeGraph(animatedData3),
+  ];
+
   return (
     <Animated.View style={styles.graphCard}>
       <LineChart

@@ -7,6 +7,9 @@ type ButtonSectionProps = {
   d2Tapped: () => void;
   d3Tapped: () => void;
   d4Tapped: () => void;
+  d5Tapped: () => void;
+  d6Tapped: () => void;
+  d7Tapped: () => void;
 };
 
 type DayButtonProps = {
@@ -27,6 +30,9 @@ const ButtonSection: FC<ButtonSectionProps> = ({
   d2Tapped,
   d3Tapped,
   d4Tapped,
+  d5Tapped,
+  d6Tapped,
+  d7Tapped,
 }) => {
   return (
     <View style={styles.container}>
@@ -34,6 +40,9 @@ const ButtonSection: FC<ButtonSectionProps> = ({
       <DayButton onPress={d2Tapped} title={'D2'} />
       <DayButton onPress={d3Tapped} title={'D3'} />
       <DayButton onPress={d4Tapped} title={'D4'} />
+      <DayButton onPress={d5Tapped} title={'D5'} />
+      <DayButton onPress={d6Tapped} title={'D6'} />
+      <DayButton onPress={d7Tapped} title={'D7'} />
     </View>
   );
 };

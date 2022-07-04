@@ -17,7 +17,7 @@ const SearchScreen = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
 
-  console.log("glycemicData:" + JSON.stringify(glycemicData));
+  // console.log("glycemicData:" + JSON.stringify(glycemicData));
 
   return (
     <View>

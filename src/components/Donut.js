@@ -7,7 +7,7 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import Constants from "expo-constants";
+// import Constants from "expo-constants";
 import Svg, { G, Circle, Rect } from "react-native-svg";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);

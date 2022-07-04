@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Text, StatusBar, View, StyleSheet } from "react-native";
-import Constants from "expo-constants";
+import { Text, StatusBar, View, SafeAreaView, StyleSheet } from "react-native";
+// import Constants from "expo-constants";
 import Donut from "./Donut";
 import TrackerContext from "../TrackerContext";
 import { getTotalCarbs, getTotalGILoad } from "../utils/GlycemicUtils";
@@ -49,7 +49,7 @@ export default function DonutFactory() {
   console.log("totalGILoadCapped:" + totalGILoadCapped);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View
         style={{
           flexDirection: "row",
@@ -81,7 +81,7 @@ export default function DonutFactory() {
           max2={100}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     // justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
     // backgroundColor: "#fff",
     backgroundColor: "#000",
     padding: 8,

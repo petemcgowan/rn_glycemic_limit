@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   StyleSheet,
@@ -9,19 +9,20 @@ import {
   Dimensions,
 } from "react-native";
 
-import FlashMessage, { showMessage } from "react-native-flash-message";
+// import FlashMessage, { showMessage } from "react-native-flash-message";
 import DonutFactory from "../components/DonutFactory";
+import TrackerContext from "../TrackerContext";
 
-import {
-  contributionData,
-  data,
-  pieChartData,
-  progressChartData,
-  stackedBarGraphData,
-  stackedBarGraphDataSmaller,
-} from "../data/chartData";
+// import {
+//   contributionData,
+//   data,
+//   pieChartData,
+//   progressChartData,
+//   stackedBarGraphData,
+//   stackedBarGraphDataSmaller,
+// } from "../data/chartData";
 
-import { StackedBarChart } from "react-native-chart-kit";
+// import { StackedBarChart } from "react-native-chart-kit";
 import LineChartContainer from "../components/LineChartContainer";
 
 // for reference only, this is the old chart config
@@ -53,12 +54,12 @@ const chartConfigs = [
 const KetoLimitScreen = ({ totalCarbsForReals }) => {
   const { width } = Dimensions.get("window");
   const height = 256;
-
+  const { trackerItems } = useContext(TrackerContext);
   return (
     <View>
       <SafeAreaView style={styles.root}>
         <DonutFactory />
-        <LineChartContainer />
+        <LineChartContainer trackerItems={trackerItems} />
       </SafeAreaView>
     </View>
   );

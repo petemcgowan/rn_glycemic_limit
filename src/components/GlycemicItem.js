@@ -68,7 +68,14 @@ const GlycemicItem = ({
     carbImageToUse = require("../../assets/images/orangeCircle.png");
   }
 
-  console.log("carbAmt:" + carbAmt + ", giAmt:" + giAmt + ", glAmt:" + glAmt);
+  // console.log(
+  //   "Glycemic Item: carbAmt:" +
+  //     carbAmt +
+  //     ", giAmt:" +
+  //     giAmt +
+  //     ", glAmt:" +
+  //     glAmt
+  // );
 
   return (
     <TouchableOpacity

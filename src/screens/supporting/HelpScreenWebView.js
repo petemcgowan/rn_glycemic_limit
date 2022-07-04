@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { WebView } from "react-native-webview";
-import Constants from "expo-constants";
-import { useAssets } from "expo-asset";
-import { FileSystem } from "expo-file-system";
+// import Constants from "expo-constants";
+// import { useAssets } from "expo-asset";
+// import { FileSystem } from "expo-file-system";
 import {
   // htmlData,
   // glycemicInfo2VeryBasic,
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
     fontFamily: "Karla_300Light",
     fontSize: 16,
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    // marginTop: Constants.statusBarHeight,
   },
 });
